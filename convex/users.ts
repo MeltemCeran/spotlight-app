@@ -16,8 +16,12 @@ export const createUser = mutation({
       .query("users")
       .withIndex("by_clerk_id", (q) => q.eq("clerkId", args.clerkId))
       .first();
+    console.log("Existing User:", existingUser); // Kullanıcı var mı kontrol et
 
     if (existingUser) return;
+
+    // Kullanıcı bilgilerini logla
+    console.log("User args:", args);
 
     //createUser in db
     await ctx.db.insert("users", {
